@@ -16,6 +16,7 @@ body {
     background-color: var(--background);
     font-family: "Edu VIC WA NT Beginner";
     color: white;
+    text-align: center;
 }
 
 header {
@@ -167,8 +168,8 @@ h3 {
     color: white;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     align-items: center;
-    row-gap: 2rem;
     position: absolute;
     left: 50%;
     top: 10%;

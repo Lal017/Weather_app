@@ -21,16 +21,24 @@ const City = class {
         {
             const res = await fetch(queryURL);
             this.data = await res.json();
-            document.getElementById("current-temp" + city_arr.length + 1).textContent = this.data.main.temp;
-            document.getElementById("min-temp" + city_arr.length + 1).textContent = this.data.main.temp_min;
-            document.getElementById("max-temp" + city_arr.length + 1).textContent = this.data.main.temp_max;
 
-            document.getElementById("speed" + city_arr.length + 1).textContent = this.data.wind.speed;
-            document.getElementById("deg" + city_arr.length + 1).textContent = this.data.wind.deg;
+            // weather info
+            document.getElementById("current-temp" + city_arr.length + 1).textContent += this.data.main.temp + "°F";
+            document.getElementById("min-temp" + city_arr.length + 1).textContent += this.data.main.temp_min + "°F";
+            document.getElementById("max-temp" + city_arr.length + 1).textContent += this.data.main.temp_max + "°F";
 
-            document.getElementById("pressure" + city_arr.length + 1).textContent = this.data.main.pressure;
-            document.getElementById("humidity" + city_arr.length + 1).textContent = this.data.main.humidity;
+            document.getElementById("speed" + city_arr.length + 1).textContent += this.data.wind.speed + " MPH";
+            document.getElementById("deg" + city_arr.length + 1).textContent += this.data.wind.deg + "°";
 
+            document.getElementById("pressure" + city_arr.length + 1).textContent += this.data.main.pressure + " hPa";
+            document.getElementById("humidity" + city_arr.length + 1).textContent += this.data.main.humidity + "%";
+
+            // city info
+            document.getElementById("country" + city_arr.length + 1).textContent += this.data.sys.country;
+            document.getElementById("time-zone" + city_arr.length + 1).textContent += this.data.timezone;
+
+            document.getElementById("lat" + city_arr.length + 1).textContent += this.data.coord.lat;
+            document.getElementById("lon" + city_arr.length + 1).textContent += this.data.coord.lon;
             city_arr.push(this);
             add_switch(city_arr);
         }
@@ -84,9 +92,10 @@ add_city = () =>
     // weather container
     const weather_container = document.createElement("div");
     weather_container.className = "weather-container";
-    const weather_text = document.createTextNode("Weather Information");
     new_main.appendChild(weather_container);
-    weather_container.appendChild(weather_text);
+    const weather_h3 = document.createElement("h3");
+    weather_h3.textContent = "Weather Information";
+    weather_container.appendChild(weather_h3);
 
     // weather container contents
     const new_container = document.createElement("div");
@@ -117,34 +126,80 @@ add_city = () =>
     // weather box contents
     const curr_temp = document.createElement("p");
     curr_temp.id = "current-temp" + city_arr.length + 1;
+    curr_temp.textContent = "Current: ";
     new_box1.appendChild(curr_temp);
     const min_temp = document.createElement("p");
     min_temp.id = "min-temp" + city_arr.length + 1;
+    min_temp.textContent = "Low: ";
     new_box1.appendChild(min_temp);
     const max_temp = document.createElement("p");
     max_temp.id = "max-temp" + city_arr.length + 1;
+    max_temp.textContent = "High: ";
     new_box1.appendChild(max_temp);
 
     const speed = document.createElement("p");
     speed.id = "speed" + city_arr.length + 1;
+    speed.textContent = "Speed: ";
     new_box2.appendChild(speed);
     const deg = document.createElement("p");
     deg.id = "deg" + city_arr.length + 1;
+    deg.textContent = "Direction: ";
     new_box2.appendChild(deg);
 
     const pressure = document.createElement("p");
     pressure.id = "pressure" + city_arr.length + 1;
+    pressure.textContent = "Pressure: ";
     new_box3.appendChild(pressure);
     const humidity = document.createElement("p");
     humidity.id = "humidity" + city_arr.length + 1;
+    humidity.textContent = "Humidity: ";
     new_box3.appendChild(humidity);
 
     // city container
     const city_container = document.createElement("div");
     city_container.className = "city-container";
-    const city_text = document.createTextNode("City Information");
     new_main.appendChild(city_container);
-    city_container.appendChild(city_text);
+    const city_h3 = document.createElement("h3");
+    city_h3.textContent = "City Information";
+    city_container.appendChild(city_h3);
+
+    // city container contents
+    const new_container2 = document.createElement("div");
+    new_container2.className = "container";
+    city_container.appendChild(new_container2);
+
+    const new_box4 = document.createElement("div");
+    new_box4.className = "box";
+    new_container2.appendChild(new_box4);
+    const new_h4_4 = document.createElement("h4");
+    new_h4_4.textContent = "Location";
+    new_box4.appendChild(new_h4_4);
+
+    const new_box5 = document.createElement("div");
+    new_box5.className = "box";
+    new_container2.appendChild(new_box5);
+    const new_h4_5 = document.createElement("h4");
+    new_h4_5.textContent = "Coordinates";
+    new_box5.appendChild(new_h4_5);
+
+    // city box contents
+    const country = document.createElement("p");
+    country.id = "country" + city_arr.length + 1;
+    country.textContent = "Country: ";
+    new_box4.appendChild(country);
+    const time_zone = document.createElement("p");
+    time_zone.id = "time-zone" + city_arr.length + 1;
+    time_zone.textContent = "Time Zone: ";
+    new_box4.appendChild(time_zone);
+
+    const lat = document.createElement("p");
+    lat.id = "lat" + city_arr.length + 1;
+    lat.textContent = "Latitude: ";
+    new_box5.appendChild(lat);
+    const lon = document.createElement("p");
+    lon.id = "lon" + city_arr.length + 1;
+    lon.textContent = "Longitude: ";
+    new_box5.appendChild(lon);
 
     // Main Section
     // ---------------------------------
